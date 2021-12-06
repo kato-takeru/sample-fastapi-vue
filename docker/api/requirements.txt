@@ -1,0 +1,7 @@
+uvicorn
+fastapi
+alembic
+sqlalchemy
+sqlalchemy_utils
+mysqlclient
+pytrends

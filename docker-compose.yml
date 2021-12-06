@@ -1,0 +1,44 @@
+version: "3.0"
+
+services:
+  # FastAPI
+  api:
+    container_name: "api"
+    build:
+      context: ./docker/api/
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/var/www/fastapi/app:cached
+      - ./db:/var/www/fastapi/db:cached
+    tty: true
+    environment:
+      APP_ENV: "development"
+      TZ: "Asia/Tokyo"
+    env_file:
+      - .env.development
+    depends_on:
+      - db
+  db:
+    container_name: db
+    build: ./docker/mysql/
+    platform: linux/x86_64
+    image: db
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: fastapi
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    volumes:
+      - ./docker/mysql/db_data:/var/lib/mysql
+  front:
+    container_name: "front"
+    build: ./docker/front
+    volumes:
+      - ./front:/app
+    ports:
+      - '8080:8080'
+    tty: true
+    stdin_open: true
