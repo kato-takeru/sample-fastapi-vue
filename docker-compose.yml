@@ -42,3 +42,5 @@ services:
       - '8080:8080'
     tty: true
     stdin_open: true
+    environment:
+      VUE_APP_API_ENDPOINT: http://localhost:8000/api

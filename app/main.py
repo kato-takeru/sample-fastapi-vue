@@ -1,12 +1,12 @@
 from fastapi import FastAPI, APIRouter
-from routers.trend import router as trend_router
+from routers import router as api_router
 from starlette.middleware.cors import CORSMiddleware
 
 router = APIRouter()
 router.include_router(
-    trend_router,
-    prefix='/trends',
-    tags=['trends']
+    api_router,
+    prefix='/api',
+    tags=['api']
 )
 
 app = FastAPI()
