@@ -21,18 +21,14 @@ def read_trend(db: Session, trend_id: int):
     pytrend.build_payload(kw_list, geo='JP')
 
     df = pytrend.interest_over_time()
-    xAxis = df.filter(items=['date'], axis='columns')
 
     data = {
-        'xAxis': xAxis
+        'xAxis': df.index.date.tolist(),
+        'series': df[keyword].tolist()
     }
 
-    print(data)
-
-    # param = {
-    #     "id": trend.id,
-    #     "keyword": keyword,
-    #     "value": data
-    # }
-
-    # return param
+    return {
+        "id": trend.id,
+        "keyword": keyword,
+        "data": data
+    }

@@ -5,3 +5,4 @@ sqlalchemy
 sqlalchemy_utils
 mysqlclient
 pytrends
+statsmodels

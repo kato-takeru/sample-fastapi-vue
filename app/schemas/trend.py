@@ -1,6 +1,6 @@
 # from datetime import date
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 
 class TrendBase(BaseModel):
@@ -12,7 +12,7 @@ class TrendBase(BaseModel):
 
 
 class TrendDetail(TrendBase):
-    value: List[List] = Field(None, example="")
+    data: Dict = Field(None, example="")
 
     class Config:
         orm_mode = True

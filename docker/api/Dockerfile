@@ -1,14 +1,13 @@
-FROM python:3.8-alpine
+FROM python:3.7
 
 WORKDIR /var/www/fastapi
 
 ADD requirements.txt .
 
 # コンテナ内で必要なパッケージをインストール
-RUN apk update && \
-    apk add --update --no-cache \
-    build-base \
-    mariadb-connector-c-dev \
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \                                                      
+    build-essential \   
     gcc \
     libxslt-dev
 # requirements.txtにリストされたパッケージをインストールする
